@@ -37,7 +37,7 @@ var sTrainingDays = "";
 var xText = "คุณได้ทำการลงทะเบียน<br>ส้มฟ้าพาลุย LIVE แล้ว";
 
 $(document).ready(function () {
-
+/*
   var str = "";
   var sLineID = "Ua6b6bf745bd9bfd01a180de1a05c23b3";
   var sLineName = "Website";
@@ -52,14 +52,14 @@ $(document).ready(function () {
   Connect_DB();
   CheckEmpID();
   CheckBootCampOpen();
-
-  //main()
+*/
+  main()
 });
 
 
 
 async function main() {
-  await liff.init({ liffId: "1656865573-oOG66mOA" });
+  await liff.init({ liffId: "1657509542-rvxRyQ5X" });
   document.getElementById("isLoggedIn").append(liff.isLoggedIn());
   if(liff.isLoggedIn()) {
     getUserProfile();
