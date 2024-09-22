@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>LINE Retail Society</title>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PW7HPDW');</script>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="assets/img/favicom.ico" rel="icon">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="assets/css/style1.css" rel="stylesheet">
+  <!--<link href="assets/css/ttb.css" rel="stylesheet">-->
+  <link href="assets/css/css.css" rel="stylesheet">
+  <link href="assets/css/w3.css" rel="stylesheet">
+  <link href="assets/css/moon.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://static.line-scdn.net/liff/edge/versions/2.12.0/sdk.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+  <style type="text/css">
+    .profile-team1 {
+      border-radius: 50%; width:110px; height: 110px; 
+    }  
+  </style>
+</head>
+
+<body class="body2" data-spy="scroll" data-target=".navbar" data-offset="60" style="background-color: #e3f1f9;">
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PW7HPDW"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo mr-auto"><a href="somfah.html"><b>ONE Retail</b> <font color="#ffff00">Registration</font></a></h1>
+    </div>
+  </header>
+  <div id="isLoggedIn" style="color:#fff;"></div>
+
+  <div id="OpenBar" class="navbar1" style="display: none;">
+    <div class="nav-bg">
+      <div class="iconlink" onClick="GotoApp()">
+        <div><img src="./icon/icons-oneretail.png" style="width:30px;"></div>
+        <div class="nav-text">ONE Retail</div>
+      </div>
+      <div class="iconlink" onClick="GotoRegister()">
+        <div><img src="./icon/icon-register.png" style="width:30px;"></div>
+        <div class="nav-text">ผู้ลงทะเบียน</div>
+      </div>
+      <div class="iconlink1" onClick="Gotohome()">
+        <div><img src="./icon/icons-home.png" style="width:30px;"></div>
+        <div class="nav-text">Home</div>
+      </div>
+      <div class="iconlink" onClick="GotoReward()">
+        <div><img src="./icon/icon-reward.png" style="width:30px;"></div>
+        <div class="nav-text">ผู้ได้รางวัล</div>
+      </div>
+      <div class="iconlink" onClick="GotoAboutUs()">
+        <div><img src="./icon/icons-aboutus.png" style="width:30px;"></div>
+        <div class="nav-text">เกี่ยวกับเรา</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="DisplayLogo" class="container" style="text-align: center; margin:30px auto 40px auto; ">
+    <div style="width:100%; margin:auto; border-radius:15px; opacity: .9; padding: 40px 10px 30px 10px; max-width: 360px; min-height: 380px;">
+      <div><img src="./img/somfah-logo.png" style="width:93%; margin-top:10px; max-width:340px;"></div>
+      <div id="MyProfile1" style="margin-top:27px;"></div>
+      <div id="loading" style="margin-top:40px;">
+        <div><img src="./img/loading1.gif" style="width:50px;"></div>
+      </div>
+      <div id="OpenRegister" style="display: none;margin-top:30px;">
+        <div style="color:#ffff00;font-weight: 400; font-size:13px;"><font color="#ccc">Welcome to</font><br><b>ส้มฟ้าพาลุย</b></div>
+        <div id="OpenNameCamp" style="font-size: 15px; font-weight: 600; margin-top:18px; color:#fff;"></div>
+        <center>
+          <div class="btn-t1" onclick="KeyRegister()" style="margin-top:30px;">ลงทะเบียนกิจกรรม</div>
+        </center>
+      </div>
+      <div id="myTimer" class="carousel slide text-center" data-ride="carousel" style="display: none;">
+        <div id="MyWating"></div>
+      </div>
+      <div id="myDisplayLine" class="carousel slide text-center" data-ride="carousel" style="display: none;">
+        <div class="clr"></div>
+        <div class="form_wrapper">
+          <div class="form_container">
+            <div class="clearfix" style="margin:10px 0 20px 0;">
+              <div id="DisplayLine"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="BootCampClose" class="carousel slide text-center" data-ride="carousel" style="display: none;">
+    <center>
+      <div class="btn-t2-red" style="margin-top:20px;">ระบบยังไม่เปิดลงทะเบียน</div>
+    </center>
+  </div>
+
+  <div id="BootCampLoading" class="carousel slide text-center" data-ride="carousel" style="display: none;">
+    <div class="form_wrapper">
+      <div class="form_container">
+        <div class="clr"></div>
+        <div id="DisplayReg"></div>
+        <div style="padding:30px;" id="loading"><img src="./img/loading1.gif"><div style="padding-top:15px;color:#f68b1f;">L o a d i n g</div></div>
+        <div style="display: none;margin:10px 0 20px 0;" id="gotoLink"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="OpenBootCamp" class="carousel slide text-center" data-ride="carousel" style="display: none;">
+    <div class="clr"></div>
+    <div class="form_wrapper">
+      <div class="form_container">
+        <div class="title_container">
+          <div class="title-head">ttb Registration System</div>
+          <div id="OpenRound"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="myRegister" class="carousel slide text-center" data-ride="carousel" style="display: none; margin-top: 80px;">
+    <div class="clr"></div>
+    <div class="form_wrapper">
+      <div class="form_container">
+        <div class="title_container">
+          <div class="title-head">ONE Retail Registration</div>
+          <div id="DisplayRound" class="profile-txt" style="font-size:14px;margin-top:0px; color:#0056ff; font-weight: 600;"></div>
+        </div>
+        <div class="row clearfix">
+          <div class="">
+            <center>
+              <div id="MyProfile"></div>
+            </center>
+            <form id="test" style="margin-top:20px;" class="needs-validation" novalidate>
+              <div class="form-row">
+                <div style="font-size:12px;margin-bottom: 4px;">หากไม่ได้เป็นพนักงานของ ttb ใส่รหัสเป็น 99999</div>
+                <div class="input_field" style="width:100% !important;"> 
+                  <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                  <input required type="number" class="form-control" id="txtEmpID" placeholder="รหัสพนักงาน" />
+                  <div class="valid-feedback"></div>
+                </div>
+                <div class="input_field" style="width:100% !important;"> 
+                  <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                  <input type="text" class="form-control" id="txtEmpName" placeholder="ชื่อ-นามสกุล" required />
+                </div>
+                <div style="font-size:12px;margin-bottom: 4px;">เลือกสถานะการเป็นพนักงาน ttb</div>
+                <div class="input_field select_option">
+                  <select id="txtEmpGroup" class="form-control" style="font: 400 13px Anuphan !important;" required/>
+                    <option id="a1"></option>
+                    <option id="a2" value="ttb bank">พนักงาน ttb bank</option>
+                    <option id="a3" value="OTHER-Outsider">บุคคลภายนอกธนาคาร</option>
+                  </select>
+                  <div class="select_arrow"></div>
+                </div>
+              </div>
+              <div class="btn-t1" onclick="ClickSaveProfile()" type="submit" id="test" style="margin-top:20px;">คลิกเพื่อลงทะเบียน</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+  <div id="myTimer" class="carousel slide text-center" data-ride="carousel" style="display: none;">
+    <div class="clr"></div>
+    <div class="form_wrapper">
+      <div class="form_container">
+        <div class="clearfix" style="margin:10px 0 20px 0;">
+          <div id="MyWating"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="id01" class="w3-modal w3-animate-opacity" style="z-index: 20;">
+    <div class="w3-modal-content w3-card-4" style="background: #fff;">
+      <div class="w3-container" style="min-height:300px;padding:24px;width:100%;text-align:center;">
+          <div id="DisplayUser"></div>
+          <div class="btn-t2" onclick="CloseAll()" style="margin-top:20px;">ปิดหน้าต่างนี้</div>
+          <div style="height: 15px;"></div>
+        </center>
+      </div>
+    </div>
+    <div style="height:50px;"></div>
+  </div>
+
+  <div id="id02" class="w3-modal w3-animate-opacity" style="z-index: 20;">
+    <div class="w3-modal-content w3-card-4" style="background: #000; margin-top:100px;">
+      <div class="w3-container" style="min-height:300px;padding:0px;width:100%;text-align:center;">
+          <div id="yt-wrap">
+              <div id="ytplayer"></div>
+          </div>
+          <div style="color:#0056ff;font-weight: 400; font-size:14px; margin-top:10px;"><font color="#fff">สิ้นสุดการรอคอย</font><br><b>Bootcamp 2024<br>WIN YOUR OWN-LYMPIC</b></div>
+          <div class="btn-t1" onclick="stopVideo()" style="margin-top:20px;">เข้าสู่ Bootcamp 2024</div>
+          <div style="height: 15px;"></div>
+        </center>
+      </div>
+    </div>
+    <div style="height:50px;"></div>
+  </div>
+
+<div class="clr" style="height:20px;"></div>
+<script src="./js/connect_reg.js"></script>
+<script src="./js/somfah.js"></script>
+<script src='https://use.fontawesome.com/4ecc3dbb0b.js'></script>
+<!--
+<script>
+  // 2. This code loads the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // 3. This function creates an <iframe> (and YouTube player)
+  //    after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      width: '100%',
+      height: '230',
+      videoId: 'TT6dxvtkTDw',
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    event.target.playVideo();
+    player.mute(); // comment out if you don't want the auto played video muted
+  }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.ENDED) {
+      player.seekTo(0);
+      player.playVideo();
+    }
+  }
+  function stopVideo() {
+    player.stopVideo();
+    document.getElementById('id02').style.display='none';
+  }
+</script>
+-->
+</body>
+</html>

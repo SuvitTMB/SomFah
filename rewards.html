@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>LINE Retail Society</title>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PW7HPDW');</script>
+  <!-- Favicons -->
+  <link href="assets/img/favicom.ico" rel="icon">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/css/style1.css" rel="stylesheet">
+  <link href="assets/css/button.css" rel="stylesheet">
+  <link href="assets/css/css.css" rel="stylesheet">
+  <link href="assets/css/w3.css" rel="stylesheet">
+  <link href="assets/css/moon.css" rel="stylesheet">
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+  <style type="text/css">
+    table { 
+      width: 750px; 
+      border-collapse: collapse; 
+      margin:50px auto;
+      }
+
+    /* Zebra striping */
+    tr:nth-of-type(odd) { 
+      background: #dcdfe1; 
+      }
+
+    th { 
+      background: #3498db; 
+      color: white; 
+      font-weight: bold; 
+      }
+
+    td, th { 
+      padding: 10px; 
+      border: 1px solid #ccc; 
+      text-align: left; 
+      font-size: 13px;
+      }
+
+    /* 
+    Max width before this PARTICULAR table gets nasty
+    This query will take effect for any screen smaller than 760px
+    and also iPads specifically.
+    */
+    @media 
+    only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+      table { 
+          width: 100%; 
+      }
+
+      /* Force table to not be like tables anymore */
+      table, thead, tbody, th, td, tr { 
+        display: block; 
+      }
+      
+      /* Hide table headers (but not display: none;, for accessibility) */
+      thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+      
+      tr { border: 1px solid #ccc; }
+      
+      td { 
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+        padding-left: 20%; 
+        height: 70px;
+      }
+
+      td:before { 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 14px;
+        width: 25%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        /* Label the data */
+        content: attr(data-column);
+
+        color: #000;
+        font-weight: bold;
+      }
+
+    }
+    
+  </style>
+</head>
+
+<body class="body">
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PW7HPDW"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo mr-auto"><a href="bootcamp.html"><b>ONE Retail</b> <font color="#ffff00">Registration</font></a></h1>
+    </div>
+  </header>
+
+  <div class="navbar1">
+    <div class="nav-bg">
+      <div class="iconlink" onClick="GotoApp()">
+        <div><img src="./icon/icons-oneretail.png" style="width:30px;"></div>
+        <div class="nav-text">ONE Retail</div>
+      </div>
+      <div class="iconlink" onClick="GotoRegister()">
+        <div><img src="./icon/icon-register.png" style="width:30px;"></div>
+        <div class="nav-text">ผู้ลงทะเบียน</div>
+      </div>
+      <div class="iconlink" onClick="Gotohome()">
+        <div><img src="./icon/icons-home.png" style="width:30px;"></div>
+        <div class="nav-text">Home</div>
+      </div>
+      <div class="iconlink1" onClick="GotoReward()">
+        <div><img src="./icon/icon-reward.png" style="width:30px;"></div>
+        <div class="nav-text">ผู้ได้รางวัล</div>
+      </div>
+      <div class="iconlink" onClick="GotoAboutUs()">
+        <div><img src="./icon/icons-aboutus.png" style="width:30px;"></div>
+        <div class="nav-text">เกี่ยวกับเรา</div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <center>
+      <div style="margin:80px auto 15px auto; font-weight: 600; font-size: 14px; color:#0056ff;">ข้อมูลผู้ได้รับรางวัล</div>
+      </div>
+      <div id="AllRewardsF"></div>
+
+<!--
+      <table style="width:96%; margin:auto;">
+        <thead>
+          <tr>
+            <th>ชื่อ-นามสกุล</th>
+            <th>สาขา</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-column="ชื่อ-นามสกุล">James</td>
+            <td data-column="Line Name">Matman</td>
+          </tr>
+          <tr>
+            <td data-column="First Name">Andor</td>
+            <td data-column="Last Name">Nagy</td>
+          </tr>
+          <tr>
+            <td data-column="First Name">Tamas</td>
+            <td data-column="Last Name">Biro</td>
+          </tr>
+          <tr>
+            <td data-column="First Name">Zoli</td>
+            <td data-column="Last Name">Mastah</td>
+          </tr>
+          <tr>
+            <td data-column="First Name">Szabi</td>
+            <td data-column="Last Name">Nagy</td>
+          </tr>
+        </tbody>
+      </table>
+-->
+
+    </center>
+ </main>
+
+
+  <div id="id01" class="w3-modal w3-animate-opacity" style="z-index: 20;">
+    <div class="w3-modal-content w3-card-4" style="background: #fff;">
+      <div class="w3-container" style="min-height:300px;padding:24px;width:100%;text-align:center;">
+          <div style="font-size: 14px; color:#0056ff; font-weight: 600;">ข้อมูลผู้เข้าร่วมกิจกรรม</div>
+          <div id="DisplayUser"></div>
+          <div class="btn-t2" onclick="CloseAll()" style="margin-top:20px;">ปิดหน้าต่างนี้</div>
+          <div style="height: 15px;"></div>
+        </center>
+      </div>
+    </div>
+    <div style="height:50px;"></div>
+  </div>  
+  <div class="clr" style="height:80px;"></div>
+
+
+  <!-- Vendor JS Files #dde7f0-->
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="./js/connect_reg.js"></script>
+  <script src="./js/rewards.js"></script>
+</body>
+</html>
